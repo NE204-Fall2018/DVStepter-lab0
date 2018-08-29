@@ -1,0 +1,16 @@
+# Python cruft
+*.pyc
+
+# Editor cruft
+*.swp
+*.*~
+
+# Ignore data folder
+data/*
+
+# LaTeX cruft
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
