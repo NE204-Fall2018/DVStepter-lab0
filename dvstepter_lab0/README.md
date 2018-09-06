@@ -1,3 +1,7 @@
+Darrell Stepter
+
+NE 204 Lab 0: Energy Calibration with Reproducible Workflows
+
 Data was collected with a Coaxial HPGe detector with Co-60,
 Am-241, Ba-133, Cs-137 and Eu-152 sources.
 
