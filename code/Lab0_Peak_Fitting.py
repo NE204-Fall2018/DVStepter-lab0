@@ -15,20 +15,21 @@ import matplotlib.pyplot as plt
 
 
 #reads/displays ascii formatted txt file and names the data "spectra"
-spectra=ascii.read("lab0_spectral_data.txt")
+spectra=ascii.read("../lab0_spectral_data.txt")
 #print(spectra)
 
 
 # In[3]:
 
 
+plt.figure()
 plt.semilogy(spectra['Am-241'])
 plt.semilogy(spectra['Cs-137'])
 plt.title('$^{241}Am$ and $^{137}Cs$ Spectra by Channel')
 plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
-plt.savefig('images/SpecUncal')
+plt.savefig('../images/SpecUncal')
 #plt.show()
 
 
@@ -117,6 +118,7 @@ def peakdet(v, delta, x = None):
 #Finds and plots peaks for Cs-137 and Am-241
 AmPeak, mintab = peakdet(spectra['Am-241'],39000)
 CsPeak, mintab = peakdet(spectra['Cs-137'],39000)
+plt.figure()
 plt.semilogy(spectra['Am-241'])
 plt.semilogy(spectra['Cs-137'])
 plt.scatter(array(AmPeak)[:,0], array(AmPeak)[:,1], color='blue')
@@ -125,7 +127,7 @@ plt.title('$^{241}Am$ and $^{137}Cs$ Identified Peaks by Channel')
 plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
-plt.savefig('images/Peaks')
+plt.savefig('../images/Peaks')
 #plt.show()
 #print(AmPeak)
 #print(CsPeak)
@@ -152,21 +154,23 @@ Energy = range(8192)*slope + intercept
 
 
 #Plots Linear fit of Energy
+plt.figure()
 plt.plot(range(8192),Energy)
 plt.title('Linear Fit')
 plt.xlabel('Channel')
-plt.ylabel('Energy')
-plt.savefig('images/LinearFit')
+plt.ylabel('Energy (keV)')
+plt.savefig('../images/LinearFit')
 # In[8]:
 
 
 #Plots Ba-133 Spectra vs Calibrated Energy
+plt.figure()
 plt.semilogy(Energy,spectra['Ba-133'])
 plt.title('$^{133}Ba$ Calibrated Energy Spectrum')
 plt.xlabel('Energy (keV)')
 plt.ylabel('Counts')
 plt.legend()
-plt.savefig('images/BaSpecCal')
+plt.savefig('../images/BaSpecCal')
 #plt.show()
 
 
@@ -175,13 +179,14 @@ plt.savefig('images/BaSpecCal')
 
 #Finds Ba Peaks
 BaPeak, mintab = peakdet(spectra['Ba-133'],5000)
+plt.figure()
 plt.semilogy(spectra['Ba-133'])
 plt.scatter(array(BaPeak)[:,0], array(BaPeak)[:,1], color='blue')
 plt.title('$^{133}Ba$ Identified Peaks by Channel')
 plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
-plt.savefig('images/BaPeaks')
+plt.savefig('../images/BaPeaks')
 #plt.show()
 #print(BaPeak)
 
@@ -204,6 +209,14 @@ BaCalibrated = np.asarray([E1, E2, E3, E4, E5])
 BaExpected = np.asarray([80.9979, 276.3989, 302.8508, 356.0129, 383.8485])
 #print(BaCalibrated, BaExpected)
 
+
+CalVsEx = {'Expected Energy (keV)': BaExpected,
+            'Calibrated Energy (keV)': BaCalibrated}
+
+ascii.write(CalVsEx, output='../text/Comparison.tex', overwrite=True, Writer=ascii.Latex, names=['Expected Energy (keV)','Calibrated Energy (keV)'], col_align='|lr|',
+            latexdict={'preamble': r'\begin{center}',
+                       'tablefoot': r'\end{center}',
+                       'tabletype': 'table*'})
 
 # In[12]:
 
@@ -234,7 +247,7 @@ ax.set_frame_on(False)
 
 
 ax.table(cellText=dat, rowLabels=rows, colLabels=columns, loc='center')
-plt.savefig('images/ErrorAnalysis')
+plt.savefig('../images/ErrorAnalysis')
 #plt.show()
 
 
@@ -246,7 +259,7 @@ data = {'\gamma Energy (keV)': [80.999, 276.399, 302.851, 356.013, 383.849],
             '\eta': rel_error,
             '\delta': percent_error}
 
-ascii.write(data, output='text/ErrorAnalysis.tex', overwrite=True, Writer=ascii.Latex, names=['\gamma Energy (keV)','\epsilon', '\eta', '\delta'], col_align='|lr|',
+ascii.write(data, output='../text/ErrorAnalysis.tex', overwrite=True, Writer=ascii.Latex, names=['\gamma Energy (keV)','\epsilon', '\eta', '\delta'], col_align='|lr|',
             latexdict={'preamble': r'\begin{center}',
                        'tablefoot': r'\end{center}',
                        'tabletype': 'table*'})
