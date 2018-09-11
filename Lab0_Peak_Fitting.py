@@ -29,7 +29,7 @@ plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
 plt.savefig('images/SpecUncal')
-plt.show()
+#plt.show()
 
 
 # In[4]:
@@ -42,16 +42,16 @@ from numpy import NaN, Inf, arange, isscalar, asarray, array
 def peakdet(v, delta, x = None):
     """
     Converted from MATLAB script at http://billauer.co.il/peakdet.html
-    
+
     Returns two arrays
-    
+
     function [maxtab, mintab]=peakdet(v, delta, x)
     %PEAKDET Detect peaks in a vector
     %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
     %        maxima and minima ("peaks") in the vector V.
     %        MAXTAB and MINTAB consists of two columns. Column 1
     %        contains indices in V, and column 2 the found values.
-    %      
+    %
     %        With [MAXTAB, MINTAB] = PEAKDET(V, DELTA, X) the indices
     %        in MAXTAB and MINTAB are replaced with the corresponding
     %        X-values.
@@ -59,33 +59,33 @@ def peakdet(v, delta, x = None):
     %        A point is considered a maximum peak if it has the maximal
     %        value, and was preceded (to the left) by a value lower by
     %        DELTA.
-    
+
     % Eli Billauer, 3.4.05 (Explicitly not copyrighted).
     % This function is released to the public domain; Any use is allowed.
-    
+
     """
     maxtab = []
     mintab = []
-       
+
     if x is None:
         x = arange(len(v))
-    
+
     v = asarray(v)
-    
+
     if len(v) != len(x):
         sys.exit('Input vectors v and x must have same length')
-    
+
     if not isscalar(delta):
         sys.exit('Input argument delta must be a scalar')
-    
+
     if delta <= 0:
         sys.exit('Input argument delta must be positive')
-    
+
     mn, mx = Inf, -Inf
     mnpos, mxpos = NaN, NaN
-    
+
     lookformax = True
-    
+
     for i in arange(len(v)):
         this = v[i]
         if this > mx:
@@ -94,7 +94,7 @@ def peakdet(v, delta, x = None):
         if this < mn:
             mn = this
             mnpos = x[i]
-        
+
         if lookformax:
             if this < mx-delta:
                 maxtab.append((mxpos, mx))
@@ -126,9 +126,9 @@ plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
 plt.savefig('images/Peaks')
-plt.show()
-print(AmPeak)
-print(CsPeak)
+#plt.show()
+#print(AmPeak)
+#print(CsPeak)
 x1 = float(AmPeak[:,0])
 x2 = float(CsPeak[:,0])
 
@@ -140,7 +140,7 @@ x2 = float(CsPeak[:,0])
 peakE = [59.541, 661.657]
 channel = [x1, x2]
 slope, intercept = np.polyfit(channel, peakE, 1)
-print(slope, intercept)
+#print(slope, intercept)
 
 
 # In[7]:
@@ -160,7 +160,7 @@ plt.xlabel('Energy (keV)')
 plt.ylabel('Counts')
 plt.legend()
 plt.savefig('images/BaSpecCal')
-plt.show()
+#plt.show()
 
 
 # In[9]:
@@ -175,8 +175,8 @@ plt.xlabel('Channel')
 plt.ylabel('Counts')
 plt.legend()
 plt.savefig('images/BaPeaks')
-plt.show()
-print(BaPeak)
+#plt.show()
+#print(BaPeak)
 
 
 # In[10]:
@@ -187,7 +187,7 @@ E2 = (float(BaPeak[3,0]))*slope + intercept
 E3 = (float(BaPeak[4,0]))*slope + intercept
 E4 = (float(BaPeak[5,0]))*slope + intercept
 E5 = (float(BaPeak[6,0]))*slope + intercept
-print(E1, E2, E3, E4, E5)
+#print(E1, E2, E3, E4, E5)
 
 
 # In[11]:
@@ -195,7 +195,7 @@ print(E1, E2, E3, E4, E5)
 
 BaCalibrated = np.asarray([E1, E2, E3, E4, E5])
 BaExpected = np.asarray([80.9979, 276.3989, 302.8508, 356.0129, 383.8485])
-print(BaCalibrated, BaExpected)
+#print(BaCalibrated, BaExpected)
 
 
 # In[12]:
@@ -205,9 +205,9 @@ print(BaCalibrated, BaExpected)
 abs_error = abs(BaExpected-BaCalibrated)
 rel_error = abs_error/abs(BaExpected)
 percent_error = 100*rel_error
-print(abs_error)
-print(rel_error)
-print(percent_error)
+#print(abs_error)
+#print(rel_error)
+#print(percent_error)
 
 
 # In[13]:
@@ -221,14 +221,14 @@ rows = ('Absolute Error', 'Relative Error', 'Percent Error')
 fig, ax = plt.subplots()
 
 # Hide axes
-ax.xaxis.set_visible(False) 
+ax.xaxis.set_visible(False)
 ax.yaxis.set_visible(False)
-ax.set_frame_on(False) 
+ax.set_frame_on(False)
 
 
 ax.table(cellText=dat, rowLabels=rows, colLabels=columns, loc='center')
 plt.savefig('images/ErrorAnalysis')
-plt.show()
+#plt.show()
 
 
 # In[14]:
@@ -243,4 +243,3 @@ ascii.write(data, output='text/ErrorAnalysis.tex', overwrite=True, Writer=ascii.
             latexdict={'preamble': r'\begin{center}',
                        'tablefoot': r'\end{center}',
                        'tabletype': 'table*'})
-
