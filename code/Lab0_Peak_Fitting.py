@@ -235,7 +235,7 @@ percent_error = 100*rel_error
 
 dat = [abs_error, rel_error, percent_error]
 
-columns = ('80.999 keV', '276.399 keV', '302.851 keV', '356.013 keV', '383.849 keV')
+columns = ('80.9979 keV', '276.3989 keV', '302.8508 keV', '356.0129 keV', '383.8485 keV')
 rows = ('Absolute Error', 'Relative Error', 'Percent Error')
 
 fig, ax = plt.subplots()
@@ -254,7 +254,7 @@ plt.savefig('../images/ErrorAnalysis')
 # In[14]:
 
 
-data = {'\gamma Energy (keV)': [80.999, 276.399, 302.851, 356.013, 383.849],
+data = {'\gamma Energy (keV)': [80.9979, 276.3989, 302.8508, 356.0129, 383.8485],
             '\epsilon': abs_error,
             '\eta': rel_error,
             '\delta': percent_error}
