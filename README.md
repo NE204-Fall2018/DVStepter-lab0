@@ -2,7 +2,7 @@
 
 ## Energy Calibration with Reproducible Workflows
 
-Data was collected with a Coaxial HPGe detector with Co-60,
+Data was collected with a Coaxial HPGe detector with $^{60}$Co,
 Am-241, Ba-133, Cs-137 and Eu-152 sources.
 
 A python script was written to perform an energy calibration for the
