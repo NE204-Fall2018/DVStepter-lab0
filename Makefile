@@ -11,11 +11,14 @@ $(manuscript).pdf: $(manuscript).tex text/*.tex references.bib images/*.png
 
 # Get/download necessary data
 data :
-	echo "WARNING: make data has not yet been implemented."
+	curl -L -o lab0_spectral_data.txt https://www.dropbox.com/s/hutmwip3681xlup/lab0_spectral_data.txt?dl=0
 
 # Validate that downloaded data is not corrupted
 validate :
-	echo "WARNING: make validate has not yet been implemented."
+	curl -L -o lab0_spectral_data.md5sum https://www.dropbox.com/s/amumdrm9zp1kn8d/lab0_spectral_data.md5?dl=0
+#need to have the same base name to run md5sum. -c knows to compare the md5sum
+#against another file that has a similar base ie 'lab0_spectral_data'
+	md5sum -c lab0_spectral_data.md5sum
 
 # Run tests on analysis code
 test :
@@ -23,7 +26,7 @@ test :
 
 # Automate running the analysis code
 analysis :
-	cd code/ && Lab0_Peak_Fitting.py
+	cd code/ && python Lab0_Peak_Fitting.py
 
 clean :
 	rm -f *.aux *.log *.bbl *.lof *.lot *.blg *.out *.toc *.run.xml *.bcf
