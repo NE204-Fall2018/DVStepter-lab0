@@ -254,12 +254,12 @@ plt.savefig('../images/ErrorAnalysis')
 # In[14]:
 
 
-data = {'\gamma Energy (keV)': [80.9979, 276.3989, 302.8508, 356.0129, 383.8485],
-            '\epsilon': abs_error,
-            '\eta': rel_error,
-            '\delta': percent_error}
+data = {'$\gamma$ Energy (keV)': [80.9979, 276.3989, 302.8508, 356.0129, 383.8485],
+            'Absolute Error $\epsilon$': abs_error,
+            'Relative Error $\eta$': rel_error,
+            'Percent Error $\delta$ (\%)': percent_error}
 
-ascii.write(data, output='../text/ErrorAnalysis.tex', overwrite=True, Writer=ascii.Latex, names=['\gamma Energy (keV)','\epsilon', '\eta', '\delta'], col_align='|lr|',
+ascii.write(data, output='../text/ErrorAnalysis.tex', overwrite=True, Writer=ascii.Latex, names=['$\gamma$ Energy (keV)','Absolute Error $\epsilon$', 'Relative Error $\eta$', 'Percent Error $\delta$ (\%)'],
             latexdict={'preamble': r'\begin{center}',
                        'tablefoot': r'\end{center}',
                        'tabletype': 'table*'})
