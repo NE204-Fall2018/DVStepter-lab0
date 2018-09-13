@@ -20,7 +20,7 @@ validate :
 
 # Run tests on analysis code
 test :
-	nosetests --no-byte-compile test/*
+	cd test/ && python test.py
 
 # Automate running the analysis code
 analysis :
