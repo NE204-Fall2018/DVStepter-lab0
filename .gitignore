@@ -1,5 +1,6 @@
 # Python cruft
 *.pyc
+test/.pytest_cache/*
 
 # Editor cruft
 *.swp

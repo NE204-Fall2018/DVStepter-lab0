@@ -20,7 +20,7 @@ validate :
 
 # Run tests on analysis code
 test :
-	cd test/ && python test.py
+	cd test/ && pytest
 
 # Automate running the analysis code
 analysis :
